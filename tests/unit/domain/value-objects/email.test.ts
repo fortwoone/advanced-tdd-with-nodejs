@@ -40,6 +40,7 @@ describe('Email Value Object', () => {
       expect(Email.isValid('test@')).toBe(false);
       expect(Email.isValid('@example.com')).toBe(false);
       expect(Email.isValid('test..test@example.com')).toBe(false);
+      expect(Email.isValid("test@@example.com")).toBe(false);
     });
   });
 
