@@ -64,6 +64,23 @@ describe('Email Value Object', () => {
     });
   });
 
-  // TODO: Exercise 3.c - Write tests for getDomain() and getLocalPart()
-  // Remove the TODO comment and add your tests below
+    describe("domain", () =>{
+        it("should return the part after the @", ()=> {
+            const email = new Email("truc@muche.com");
+            const email2 = new Email("machin@chouette.fr");
+
+            expect(email.getDomain() == "muche.com").toBe(true);
+            expect(email2.getDomain() == "chouette.fr").toBe(true);
+        })
+    });
+
+    describe("local_part", () => {
+        it("should return the part before the @", () => {
+            const email = new Email("truc@muche.com");
+            const email2 = new Email("machin@chouette.fr");
+
+            expect(email.getLocalPart() == "truc").toBe(true);
+            expect(email2.getLocalPart() == "machin").toBe(true);
+        })
+    })
 });

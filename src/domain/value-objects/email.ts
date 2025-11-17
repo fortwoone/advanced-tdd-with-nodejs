@@ -1,4 +1,4 @@
-import { ValueObject } from '@shared/types';
+import { ValueObject } from '../../shared/types/common.js';
 
 export class Email extends ValueObject<string> {
     private static readonly EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -9,10 +9,12 @@ export class Email extends ValueObject<string> {
 
     constructor(email: string) {
 
-        if (!Email.isValid(email)) {
+        let to_check = email.trim().toLowerCase();
+
+        if (!Email.isValid(to_check)) {
             throw new Error(`Invalid email format: ${email}`);
         }
-        super(email);
+        super(to_check);
     }
 
     public static isValid(email: string): boolean {

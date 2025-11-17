@@ -26,6 +26,7 @@
       "@shared/*": ["shared/*"]
     }
   },
+  "moduleDirectories": ["src"],
   "include": [
     "src/**/*"
   ],
