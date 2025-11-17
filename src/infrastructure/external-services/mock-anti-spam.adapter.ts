@@ -1,4 +1,4 @@
-import { AntiSpamPort } from '../../domain/ports/anti-spam.port.js';
+import { AntiSpamPort } from '@domain/ports/anti-spam.port';
 
 /**
  * MockAntiSpamAdapter - Test Double Implementation
@@ -14,30 +14,30 @@ import { AntiSpamPort } from '../../domain/ports/anti-spam.port.js';
  * without depending on external services.
  */
 export class MockAntiSpamAdapter implements AntiSpamPort {
-  private readonly blockedDomains = ['spam.com', 'fake.com', 'bot.net'];
-  private readonly blockedPatterns = ['blocked@', 'spam@'];
+    private readonly blockedDomains = ['spam.com', 'fake.com', 'bot.net'];
+    private readonly blockedPatterns = ['blocked@', 'spam@'];
 
-  /**
-   * Checks if an email is blocked using mock rules
-   *
-   * @param email - The email address to check
-   * @returns Promise<boolean> - true if blocked, false if allowed
-   */
-  async isBlocked(email: string): Promise<boolean> {
-    // Check blocked patterns first
-    for (const pattern of this.blockedPatterns) {
-      if (email.includes(pattern)) {
-        return true;
-      }
+    /**
+     * Checks if an email is blocked using mock rules
+     *
+     * @param email - The email address to check
+     * @returns Promise<boolean> - true if blocked, false if allowed
+     */
+    async isBlocked(email: string): Promise<boolean> {
+        // Check blocked patterns first
+        for (const pattern of this.blockedPatterns) {
+            if (email.includes(pattern)) {
+                return true;
+            }
+        }
+
+        // Check blocked domains
+        const domain = email.split('@')[1];
+        if (domain && this.blockedDomains.includes(domain)) {
+            return true;
+        }
+
+        // Email is allowed
+        return false;
     }
-
-    // Check blocked domains
-    const domain = email.split('@')[1];
-    if (domain && this.blockedDomains.includes(domain)) {
-      return true;
-    }
-
-    // Email is allowed
-    return false;
-  }
 }
